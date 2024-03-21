@@ -1,0 +1,62 @@
+create database Practica7
+
+
+Create table tbl_producto(
+	idProducto INT PRIMARY KEY IDENTITY(1,1),
+	Nombre VARCHAR(50),
+	Precio DECIMAL(18,2)
+)
+go
+
+CREATE PROCEDURE SP_obtener_productoId(
+@idProducto INT
+)
+AS
+BEGIN
+	SELECT * FROM tbl_producto WHERE idProducto=@idProducto
+END;
+exec SP_obtener_productoId 1
+go
+CREATE PROCEDURE SP_insert_producto(
+@nombre varchar(50),
+@precio DECIMAL(18,2)
+)
+AS
+BEGIN
+	insert into tbl_producto values(@nombre, @precio)
+END;
+
+
+go
+CREATE PROCEDURE SP_actualizar_producto(
+@idProducto INT,
+@nombre varchar(50),
+@precio DECIMAL(18,2)
+)
+AS
+BEGIN
+	UPDATE tbl_producto SET Nombre=@nombre, Precio=@precio WHERE idProducto=@idProducto
+END;
+
+go
+CREATE PROCEDURE SP_eliminar_producto(
+@idProducto INT
+)
+AS
+BEGIN
+	DELETE FROM tbl_producto WHERE idProducto=@idProducto
+END;
+
+
+go
+CREATE PROCEDURE SP_obtener_productos
+AS
+BEGIN
+	SELECT * FROM tbl_producto
+END;
+
+
+exec SP_obtener_productos
+exec SP_insert_producto 'Coca Cola',2.25
+
+
