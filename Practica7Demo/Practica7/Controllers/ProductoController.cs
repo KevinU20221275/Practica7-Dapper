@@ -54,7 +54,7 @@ namespace Practica7.Controllers
         public IActionResult Delete(int idProducto)
         {
             var producto = _iproducto.ObtenerProductoPorId(idProducto);
-            if (producto != null)
+            if (producto == null)
             {
                 return NotFound();
             }
